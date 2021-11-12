@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/kristofferkortbaek/.config/nvim/plugged/vim-solarized8'
+let g:netrw_dirhist_3='/Users/kristofferkortbaek/.config/nvim/plugged'
+let g:netrw_dirhist_2='/Users/kristofferkortbaek/.config/nvim'
+let g:netrw_dirhist_1='/Users/kristofferkortbaek/Documents/Datalogi/UIS/aulaProt/UIS'
