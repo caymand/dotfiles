@@ -1,0 +1,6 @@
+ignore-empty-password
+disable-caps-lock-text
+image=$HOME/Wallpapers/blur_main.png
+font=Monospace
+
+scaling=fill
