@@ -15,14 +15,17 @@ order += "ipv6"
 order += "wireless _first_"
 # order += "ethernet _first_"
 order += "battery all"
-order += "cpu_temperature all"
+order += "cpu_temperature 0"
 order += "cpu_usage"
 order += "disk /"
 order += "memory"
+order += "volume master"
+order += "read_file BRIGHT"
 order += "tztime local"
 
 wireless _first_ {
-        format_up = "W: (%quality at %essid) %ip"
+        #format_up = "W: (%quality at %essid) %ip"
+        format_up = "W: (%quality at %essid) %bitrate"
         format_down = "W: down"
 }
 
@@ -35,7 +38,7 @@ battery all {
         format = "%status %percentage %remaining"
 }
 
-cpu_temperature all {
+cpu_temperature 0 {
         format = "T %degrees °C"
 }
 
@@ -44,7 +47,7 @@ cpu_usage {
 }
 
 disk "/" {
-        format = "%avail"
+        format = "/ %avail"
 }
 
 memory {
@@ -55,4 +58,17 @@ memory {
 
 tztime local {
         format = "%Y-%m-%d %H:%M:%S"
+}
+
+volume master {
+        format = "VOL: %volume"
+        format_muted = "VOL: muted"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+read_file BRIGHT {
+        path = "/sys/class/backlight/amdgpu_bl0/brightness"
+        format = "%title: %content"
 }
