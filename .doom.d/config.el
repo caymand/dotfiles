@@ -32,7 +32,11 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme nil)
+
+(package-initialize)
+;; (global-font-lock-mode 0)
+(disable-theme 'doom-one)
+(blink-cursor-mode 1)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -78,10 +82,8 @@
 ;;(setq default-frame-alist '((undecorated . t)))
 (menu-bar-mode -1)
 
-(package-initialize)
-(disable-theme 'doom-one)
-;;(load-theme 'modus-vivendi t)
-(set-face-attribute 'region nil :background "#c1cdcd")
+;;(set-face-foreground 'default "black")
+;;(set-face-attribute 'region nil :background "#c1cdcd")
 
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -128,6 +130,7 @@ before we send our 'ok' to the SessionManager."
 
 ;; LSP studd
 (setq haskell-mode-local-vars-hook nil)
+(add-hook 'haskell-mode-hook 'ormolu-format-on-save-mode)
 
 ;; Keys
 (defmacro global-set-keys (&rest keycommands)
@@ -167,8 +170,8 @@ to the corresponding functions."
 (setq org-support-shift-select 't)
 
 ;; dired
-;;(dired-lis)
-(global-yascroll-bar-mode 't)
+(setq dired-listing-switches "-aBhl --sort=time")
+(scroll-bar-mode 't)
 
 ;; Auctex
 (eval-after-load "tex"
@@ -177,3 +180,6 @@ to the corresponding functions."
           TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")
     )
   )
+
+(custom-set-variables
+ '(conda-anaconda-home "~/miniforge3/"))
