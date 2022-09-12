@@ -1,0 +1,75 @@
+((:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "1f/1c2164-64c5-41b3-9ac0-7dd54035d95a" :associated
+  (:hash "b9a1cdb0295884f8b42d3021ae30de84" :file "/home/kmand/Datalogi/VtDat/Week5/f1.org" :inode 1288406)
+  :expiry 30 :last-access 1655881720.6918783 :last-access-hr "2022-06-22T09:08:40+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "3d/679bc0-2573-465b-9c3a-c2bd70ab1fc5" :associated
+  (:hash "0f34ccd4022bf86c1e8b46b6d951cfd8" :file "/home/kmand/Datalogi/VtDat/Week4/k6.org" :inode 1265831)
+  :expiry 30 :last-access 1655902902.0594392 :last-access-hr "2022-06-22T15:01:42+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "68/395127-ccfe-4cd3-ac91-28128902d241" :associated
+  (:hash "fb4c095235b1238e982926e10dde91be" :file "/home/kmand/Datalogi/VtDat/master_solutions.org" :inode 1506712)
+  :expiry 30 :last-access 1655881720.6985676 :last-access-hr "2022-06-22T09:08:40+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "3c/4ecfa0-231f-47ae-84e1-40a69fd754fc" :associated
+  (:hash "5bf3b26534c951aa2d779d5005fde775" :file "/home/kmand/Datalogi/presentations/plan.org" :inode 1432371)
+  :expiry 30 :last-access 1654778198.725929 :last-access-hr "2022-06-09T14:36:38+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "f3/d70c9c-ad83-400a-b5f1-bcfe49d00571" :associated
+  (:hash "2af9b6a2bf211ccb03545abff7546350" :file "/home/kmand/Datalogi/VtDat/Week6/f1.org" :inode 1298290)
+  :expiry 30 :last-access 1655881720.7032616 :last-access-hr "2022-06-22T09:08:40+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "96/02f5c5-a7c3-4444-b6c3-741c07736eff" :associated
+  (:hash "f32bac0c21de053c89eabb7b6887b4e3" :file "/home/kmand/Datalogi/VtDat/Week6/oev.org" :inode 1320497)
+  :expiry 30 :last-access 1654005548.8071394 :last-access-hr "2022-05-31T15:59:08+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "ae/4bcb2b-3266-4749-a0d6-8e89b732acfd" :associated
+  (:hash "565db0bc58cc3c1b5e4917c7a064359c" :file "/home/kmand/Datalogi/VtDat/Week4/f1.org" :inode 1172654)
+  :expiry 30 :last-access 1655881720.7080562 :last-access-hr "2022-06-22T09:08:40+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "92/672815-7d24-402d-8830-571d6b35e45a" :associated
+  (:hash "50e964f97385a7a8036b185c69eb5162" :file "/home/kmand/Datalogi/bachrlor/notes.org" :inode 1117744)
+  :expiry 30 :last-access 1652628896.629362 :last-access-hr "2022-05-15T17:34:56+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "be/1130c4-d2d0-477d-ad55-af6cb7b7bf84" :associated
+  (:hash "b6a63698b4b9dc49901cc2900369eebe" :file "/home/kmand/Datalogi/VtDat/Week3/f2.org" :inode 976038)
+  :expiry 30 :last-access 1652804387.9378676 :last-access-hr "2022-05-17T18:19:47+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "98/9dbd2b-2e7b-4373-a9f1-258a0cac1f27" :associated
+  (:hash "15800aa0238fba2acaa147a409222149" :file "/home/kmand/Datalogi/VtDat/Week3/algorithms.org" :inode 972565)
+  :expiry 30 :last-access 1655881720.7111921 :last-access-hr "2022-06-22T09:08:40+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "ac/b33b67-d5fb-4ac8-b2a9-01e3d573a5b1" :associated
+  (:hash "0300539f8648a70fc703c6a0e2c5eb33" :file "/home/kmand/Datalogi/VtDat/Week3/k4.org" :inode 967982)
+  :expiry 30 :last-access 1655881720.7142715 :last-access-hr "2022-06-22T09:08:40+0200")
+ (:container
+  ((elisp org-element--headline-cache)
+   (elisp org-element--cache))
+  :persist-file "40/7de04c-b57d-490e-904c-d2560683ebb8" :associated
+  (:hash "0d7407674241228ba2e9f57e1d94491d" :file "/home/kmand/Datalogi/VtDat/Week3/f1.org" :inode 940580)
+  :expiry 30 :last-access 1652106565.273471 :last-access-hr "2022-05-09T16:29:25+0200")
+ (:container
+  ((index "2.4"))
+  :persist-file "61/6951d7-d602-4143-99c6-33a89366362f" :associated nil :expiry never :last-access 1662660438.0398448 :last-access-hr "2022-09-08T20:07:18+0200"))
