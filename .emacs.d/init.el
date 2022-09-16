@@ -16,7 +16,9 @@
 ;; Modes
 (use-package haskell-mode
   :ensure t
-)
+  )
+(require 'ido)
+(ido-mode t)
 
 ;; Code formating
 (use-package format-all
@@ -68,6 +70,7 @@ to the corresponding functions."
 	  (lambda () (local-set-key (kbd "C-c c c") 'org-latex-export-to-pdf))
 )
 
+;; Variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -161,6 +164,7 @@ to the corresponding functions."
  ;; If there is more than one, they won't work right.
  )
 
+;; Spell checking
 (global-auto-revert-mode)
 (setq ispell-list-command "--list")
 (setq ispell-program-name "/usr/local/bin/aspell")
