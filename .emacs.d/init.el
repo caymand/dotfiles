@@ -19,6 +19,9 @@
   )
 (require 'ido)
 (ido-mode t)
+(eval-after-load "flyspell" '(progn
+  (define-key flyspell-mouse-map (kbd "<C-down-mouse-1>") #'flyspell-correct-word)
+  (define-key flyspell-mouse-map (kbd "<C-mouse-1>") 'undefined) ))
 
 ;; Code formating
 (use-package format-all
@@ -51,14 +54,6 @@ to the corresponding functions."
       (setq keycommands (cddr keycommands)))
     (push 'progn setkey-list)
     setkey-list))
-
-(global-unset-key (kbd "M-1"))
-(global-unset-key (kbd "M-2"))
-(global-unset-key (kbd "M-3"))
-(global-unset-key (kbd "M-4"))
-(global-unset-key (kbd "M-5"))
-;; (global-unset-key (kbd "\C-c b p"))
-;; (global-unset-key (kbd "\C-c b n"))
 
 (global-set-keys
  "\C-c b p" 'previous-buffer
@@ -168,3 +163,9 @@ to the corresponding functions."
 (global-auto-revert-mode)
 (setq ispell-list-command "--list")
 (setq ispell-program-name "/usr/local/bin/aspell")
+
+
+;; Hookse
+(add-hook 'org-mode-hook (lambda ()
+			   (auto-fill-mode t)
+			   (flyspell-mode t)))
