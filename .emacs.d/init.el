@@ -3,31 +3,49 @@
 (package-initialize)
 
 ;; Layout
-(add-to-list 'default-frame-alist '(font . "Iosevka-18"))
-(set-face-attribute 'default nil :weight 'Regular :font "Iosevka-18")
+(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
+(set-face-attribute 'default nil :weight 'Regular :font "Iosevka-14")
 (global-linum-mode 't)
 (column-number-mode 't)
-(tool-bar-mode -1)
-(menu-bar-mode -1)
+(tool-bar-mode t)
+(menu-bar-mode t)
+(setq tool-bar-style 'image)
 
 ;; Dired
 (setq dired-lising-switches "-aBhl --sort=time")
 
 ;; Modes
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
+(require 'hs-lint)
 (use-package haskell-mode
   :ensure t
   )
+(add-hook 'haskell-mode-hook (lambda ()
+			       (local-set-key (kbd "C-c C-l") 'hs-lint)
+			       (format-all-mode t)))
 (require 'ido)
 (ido-mode t)
 (eval-after-load "flyspell" '(progn
   (define-key flyspell-mouse-map (kbd "<C-down-mouse-1>") #'flyspell-correct-word)
   (define-key flyspell-mouse-map (kbd "<C-mouse-1>") 'undefined) ))
 
+(with-eval-after-load "persp-mode"
+ (setq wg-morph-on nil)
+ (setq persp-autokill-buffer-on-remove 'kill-weak)
+ (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
+(require 'persp-mode)
+
+
 ;; Code formating
 (use-package format-all
   :ensure t
-)
-(add-hook 'haskell-mode-hook 'format-all-mode)
+  )	    
 (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
 (setq format-all-show-errors 'errors)
 (set-fill-column 81)
@@ -151,7 +169,8 @@ to the corresponding functions."
      ("_Ledger" ledger-mode)
      ("_Nginx" nginxfmt)
      ("_Snakemake" snakefmt)))
- '(package-selected-packages '(flycheck which-key use-package format-all)))
+ '(haskell-check-command "hlint")
+ '(package-selected-packages '(persp-mode flycheck which-key use-package format-all)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -162,10 +181,11 @@ to the corresponding functions."
 ;; Spell checking
 (global-auto-revert-mode)
 (setq ispell-list-command "--list")
-(setq ispell-program-name "/usr/local/bin/aspell")
+(setq ispell-program-name "aspell")
 
 
-;; Hookse
+;; Hooks
 (add-hook 'org-mode-hook (lambda ()
 			   (auto-fill-mode t)
 			   (flyspell-mode t)))
+(put 'scroll-left 'disabled nil)
