@@ -3,8 +3,13 @@
 (package-initialize)
 
 ;; Layout
+
 (add-to-list 'default-frame-alist '(font . "Iosevka-14"))
 (set-face-attribute 'default nil :weight 'Regular :font "Iosevka-14")
+(if (eq system-type 'darwin)
+  (add-to-list 'default-frame-alist '(font . "Iosevka-18"))
+  (set-face-attribute 'default nil :weight 'Regular :font "Iosevka-18")
+)
 (global-linum-mode 't)
 (column-number-mode 't)
 (tool-bar-mode t)
@@ -41,6 +46,12 @@
  (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
 (require 'persp-mode)
 
+(use-package ein
+  :ensure t)
+
+;; Terminal
+(use-package vterm
+  :ensure t)
 
 ;; Code formating
 (use-package format-all
@@ -170,7 +181,8 @@ to the corresponding functions."
      ("_Nginx" nginxfmt)
      ("_Snakemake" snakefmt)))
  '(haskell-check-command "hlint")
- '(package-selected-packages '(persp-mode flycheck which-key use-package format-all)))
+ '(package-selected-packages
+   '(ein vterm persp-mode flycheck which-key use-package format-all)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
