@@ -1,3 +1,5 @@
+
+
 (setq user-mail-address "kristoffer@kortbaek.dk"
       user-full-name    "Kristoffer August Korbaek")
 
@@ -25,11 +27,20 @@
 (add-to-list 'gnus-secondary-select-methods
 	     '(nntp "news.gmane.io"))
  
-(setq smtpmail-smtp-service 465)
+(setq smtpmail-smtp-service 587)
 (setq send-mail-function 'smtpmail-send-it
       message-send-mail-function 'smtpmail-send-it
-      smtpmail-smtp-server "smtp.fastmail.com")
+      smtpmail-smtp-server "smtp.fastmail.com"
+      smtpmail-default-smtp-server "smtp.fastmail.com"
+      smtpmail-stream-typ 'starttls)
 
 (setq gnus-summary-line-format "%o%U%R%z%B%(%[%4L: %-23,23f%]%) %s\n"
       gnus-large-newsgroup 200
       large-newsgroup-initial 200)
+
+(setq gnus-parameters
+      '(("nndraft\\..*"
+	 (display . all))))
+;; (setq gnus-thread-sort-functions
+;;       '(gnus-thread-sort-by-most-recent-date)
+;;      )
