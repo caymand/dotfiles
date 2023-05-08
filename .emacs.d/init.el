@@ -1,57 +1,69 @@
+;; Melpa stuff
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("cselpa" . "https://elpa.thecybershadow.net/packages/"))
 (package-initialize)
 
-;; Layout
-
-(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
-(set-face-attribute 'default nil :weight 'Regular :font "Iosevka-14")
-(if (eq system-type 'darwin)
-  (add-to-list 'default-frame-alist '(font . "Iosevka-18"))
-  (set-face-attribute 'default nil :weight 'Regular :font "Iosevka-18")
-)
+;; Look
+(set-face-attribute 'default nil :height 140 :font "Monospace")
 (global-linum-mode 't)
 (column-number-mode 't)
-(tool-bar-mode t)
-(menu-bar-mode t)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 (setq tool-bar-style 'image)
+(set-fill-column 81)
+(require 'ido)
+(set-face-attribute 'region nil :background "#666")
+
+;; Make terminal emacs understand ctrl+shift key-chords
+(require 'term-keys)
+(term-keys-mode t)
 
 ;; Dired
 (setq dired-lising-switches "-aBhl --sort=time")
 
 ;; Modes
+; Just give me tabs in plain-text!!!
+(add-hook 'text-mode-hook
+          (lambda ()
+            (define-key text-mode-map "\t" 'tab-to-tab-stop)))
+; Org
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "C-c c c") 'org-latex-export-to-pdf)))
+
+; Latex
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
       org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
+; Python
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+
+;; Vagrant tramp
+
+; Everything Lisp <3
+(setq inferior-lisp-program "sbcl")
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(require 'hs-lint)
 (use-package haskell-mode
   :ensure t
   )
+; Haskell <>
 (add-hook 'haskell-mode-hook (lambda ()
 			       (local-set-key (kbd "C-c C-l") 'hs-lint)
 			       (format-all-mode t)))
-(require 'ido)
+;; Other 
 (ido-mode t)
 (eval-after-load "flyspell" '(progn
   (define-key flyspell-mouse-map (kbd "<C-down-mouse-1>") #'flyspell-correct-word)
   (define-key flyspell-mouse-map (kbd "<C-mouse-1>") 'undefined) ))
 
-(with-eval-after-load "persp-mode"
- (setq wg-morph-on nil)
- (setq persp-autokill-buffer-on-remove 'kill-weak)
- (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
-(require 'persp-mode)
-
-(use-package ein
-  :ensure t)
-
-;; Terminal
-(use-package vterm
-  :ensure t)
 
 ;; Code formating
 (use-package format-all
@@ -59,8 +71,6 @@
   )	    
 (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
 (setq format-all-show-errors 'errors)
-(set-fill-column 81)
-(auto-fill-mode 't)
 
 ;; Keys
 (use-package which-key
@@ -88,10 +98,6 @@ to the corresponding functions."
  "\C-c b p" 'previous-buffer
  "\C-c b n" 'next-buffer
  "\C-c c c" 'compile
-)
-
-(add-hook 'org-mode-hook
-	  (lambda () (local-set-key (kbd "C-c c c") 'org-latex-export-to-pdf))
 )
 
 ;; Variables
@@ -182,7 +188,7 @@ to the corresponding functions."
      ("_Snakemake" snakefmt)))
  '(haskell-check-command "hlint")
  '(package-selected-packages
-   '(ein vterm persp-mode flycheck which-key use-package format-all)))
+   '(auctex vagrant-tramp term-keys slime ein vterm persp-mode flycheck which-key use-package format-all)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -194,8 +200,6 @@ to the corresponding functions."
 (global-auto-revert-mode)
 (setq ispell-list-command "--list")
 (setq ispell-program-name "aspell")
-
-
 ;; Hooks
 (add-hook 'org-mode-hook (lambda ()
 			   (auto-fill-mode t)
