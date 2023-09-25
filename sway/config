@@ -5,7 +5,12 @@
 # Read `man 5 sway` for a complete reference.
 
 ### Variables
-#
+### Colour config
+set $active_bg #a06e00
+set $active_fg #000000
+set $inactive_bg #1a1717
+set $inactive_fg #a06e00
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -14,17 +19,20 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term gnome-terminal
+set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-#set $menu dmenu_path | dmenu | xargs swaymsg exec --
-
+set $highlight #3daee9
+set $uifont "Monospace 14"
+bindsym $mod+p exec bemenu-run -n --fn $uifont -p "▶" --tf "#A4B9EF" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
+    
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $HOME/Wallpapers/Outset_Island_day.png fill
-output HDMI-A-1 scale 1.2 res 3840x2160
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output HDMI-A-1 resolution 3840x2160 scale 1.5
+font pango:monospace 10
 #
 # Example configuration:
 #
@@ -36,32 +44,53 @@ output HDMI-A-1 scale 1.2 res 3840x2160
 #
 # Example configuration:
 #
-#exec swayidle -w \
-#          timeout 10 'swaylock' \
-#          timeout 15 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 #          before-sleep 'swaylock -f -c 000000'
 #
-# set $screenlockbg /tmp/screenlockbg.png
-# set $screenlock grim -s 0.1 $screenlockbg && swaylock -f -i $screenlockbg -s fill
-# exec swayidle -w \
-#     timeout 300 '$screenlock' \
-#     timeout 420 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
-#     resume 'swaymsg "output * dpms on"' \
-#     before-sleep '$screenlock'
-exec swayidle -w \
-	timeout 3000 'swaylock -f' \
-	timeout 4200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-	before-sleep 'swaylock -f'
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+input 1739:52560:SYNA32AC:00_06CB:CD50_Touchpad {
+    natural_scroll enabled
+    pointer_accel 0.15
+    tap enabled
+    dwt enabled
+}
+input 1133:16478:Logitech_M720_Triathlon {
+    dwt enabled
+    accel_profile "flat"    
+    pointer_accel -1.0
+}
+
+input "type:keyboard" {
+    xkb_layout dk
+    xkb_options ctrl:nocaps
+}
+set $laptop eDP-1
+bindswitch --locked lid:off output $laptop enable
+bindswitch --locked lid:on output $laptop disable
+
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym --release Print exec grim -g "$(slurp)"
+
+### Auto start
+
 exec emacs --daemon
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec gnome-keyring-daemon --start
 exec swaync
-exec_always nm-applet --indicator
-
-bindsym Alt+Shift+l exec swaylock --indicator-idle-visible -f
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+# exec_always nm-applet --indicator
 
 ### Input configuration
 #
@@ -76,58 +105,24 @@ bindsym Alt+Shift+l exec swaylock --indicator-idle-visible -f
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-    #input "1:1:AT_Translated_Set_2_keyboard" {
-#}
-input 1739:52560:SYNA32AC:00_06CB:CD50_Touchpad {
-    natural_scroll enabled
-    pointer_accel 0.55
-    tap enabled
-    dwt enabled
-}
-input 1133:16478:Logitech_M720_Triathlon {
-      pointer_accel -0.45
-}
 
-input "type:keyboard" {
-    xkb_layout dk
-    xkb_options ctrl:nocaps
-}
-set $laptop eDP-1
-bindswitch --locked lid:off output $laptop enable
-bindswitch --locked lid:on output $laptop disable
-
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
 ### Key bindings
 #
 # Basics:
 #
-    font pango:Terminus 10
-
     # Start a terminal
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+q kill
+    bindsym $mod+Shift+q kill
 
     # Start your launcher
-    #bindsym $mod+d exec $menu
-    set $highlight #3daee9
-    set $uifont "Monospace 14"
-    bindsym $mod+p exec bemenu-run --fn $uifont -b -p "▶" --tf "#A4B9EF" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
-    bindsym Alt+Space exec ulauncher
+    bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
+    # Change normal to ik
     # mouse button for dragging.
     floating_modifier $mod normal
 
@@ -135,19 +130,20 @@ bindsym XF86AudioPrev exec playerctl previous
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    bindsym Alt+Space exec ulauncher
 
     bindsym $mod+e exec emacsclient -c
     bindsym $mod+w exec chromium-browser
-
 #
 # Moving around:
 #
     # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -201,8 +197,7 @@ bindsym XF86AudioPrev exec playerctl previous
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+t layout tabbed
-    #bindsym $mod+w layout tabbed
+    bindsym $mod+t layout stacking
     bindsym $mod+s layout toggle split
 
     # Make the current focus fullscreen
@@ -231,40 +226,59 @@ bindsym XF86AudioPrev exec playerctl previous
 #
 # Resizing containers:
 #
+set $resize_xy 40px
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 40px
-    bindsym $down resize grow height 40px
-    bindsym $up resize shrink height 40px
-    bindsym $right resize grow width 40px
+
+    bindsym $left resize shrink width $resize_xy
+    bindsym $down resize grow height $resize_xy
+    bindsym $up resize shrink height $resize_xy
+    bindsym $right resize grow width $resize_xy
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 40px
-    bindsym Down resize grow height 40px
-    bindsym Up resize shrink height 40px
-    bindsym Right resize grow width 40px
+    bindsym Left resize shrink width $resize_xy
+    bindsym Down resize grow height $resize_xy
+    bindsym Up resize shrink height $resize_xy
+    bindsym Right resize grow width $resize_xy
 
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
-
 }
 bindsym $mod+r mode "resize"
+
+#
+# Border
+#
+default_border normal 2
+client.focused $active_fg $active_bg $active_fg 
+client.focused_inactive $inactive_bg $inactive_bg $inactive_fg $inactive_bg $inactive_bg
+client.unfocused $inactive_bg $inactive_bg $inactive_fg $inactive_bg $inactive_bg
 
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    #position top
-    #status_command i3status-rs
-    status_command i3status
-    swaybar_command swaybar
+    position top
+    font "monospace 11"
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while ~/.config/sway/status.sh; do sleep 1; done
+
+    colors {
+	statusline $active_bg
+        background $active_fg
+        focused_workspace $active_bg $active_bg $active_fg
+        inactive_workspace $active_fg $active_fg $active_bg
+        binding_mode $active_bg $active_bg $active_fg
+        #statusline #ffffff
+        #background #323232
+        #inactive_workspace #32323200 #32323200 #5c5c5c
+    }
 }
 
-##look
-default_border normal 3
-default_floating_border none
+include /etc/sway/config.d/*
