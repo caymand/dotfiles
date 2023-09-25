@@ -2,6 +2,9 @@ hook global WinCreate (.*\.txt|.*\.md) %{
     set-option buffer indentwidth 4
     set-option buffer tabstop 4
 }
+hook global BufWritePost .*\.md %{
+	evaluate-commands spell 
+}
 map global insert <c-e> '<esc>'
 # Hook fires when the window file type is set.
 # However, when I change filetype, the hook us removed
