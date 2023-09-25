@@ -1,0 +1,16 @@
+hook global WinCreate (.*\.txt|.*\.md) %{
+    set-option buffer indentwidth 4
+    set-option buffer tabstop 4
+}
+map global insert <c-e> '<esc>'
+# Hook fires when the window file type is set.
+# However, when I change filetype, the hook us removed
+eval %sh{
+    kak-lsp --kakoune -s $(echo %val{session})
+}
+hook global WinSetOption filetype=(c|cpp|haskell) %{
+    #lsp-auto-hover-enable
+    lsp-enable-window
+    map buffer normal <c-h> ':lsp-hover <ret>'
+    lsp-inlay-hints-enable global
+}
