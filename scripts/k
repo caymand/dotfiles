@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+# My wrapper script for starting kakoune.
+
+# Connect to existing "main" session or start a server with the session name
+if [ $(kak -l | grep "^$kak_session") ]; then
+    exec kak -c $kak_session "$@"
+else
+    kak -clear
+    exec kak -s $kak_session "$@"
+fi
