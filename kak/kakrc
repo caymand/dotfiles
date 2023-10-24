@@ -1,3 +1,7 @@
+hook global ModuleLoaded wayland %{
+	set-option global termcmd 'foot sh -c'
+}
+
 hook global WinCreate (.*\.txt|.*\.md) %{
     set-option buffer indentwidth 4
     set-option buffer tabstop 4
@@ -6,12 +10,21 @@ hook global BufWritePost .*\.md %{
 	evaluate-commands spell 
 }
 map global insert <c-e> '<esc>'
+
+# Yank. For paste i use my terminal.
+hook global NormalKey '[ydc]' %{
+  nop %sh{
+    (printf '%s' "$kak_main_reg_dquote" | wl-copy) < /dev/null > /dev/null 2>&1 &
+  }
+}
+
+ 
 # Hook fires when the window file type is set.
 # However, when I change filetype, the hook us removed
 eval %sh{
     kak-lsp --kakoune -s $(echo %val{session})
-}
-hook global WinSetOption filetype=(c|cpp|haskell) %{
+# }
+hook global WinSetOption filetype=(c|cpp|haskell|) %{
     #lsp-auto-hover-enable
     lsp-enable-window
     map buffer normal <c-h> ':lsp-hover <ret>'
