@@ -1,24 +1,27 @@
+;; Load and set initial setup
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("gnu-devel" . "https://elpa.gnu.org/devel/"))
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(load-file "~/.emacs.d/lib.el")
+
 
 ;; Look and basic stuff
+(setq-default fill-column 80)
+(setq-default tab-width 4)
+;; (set-face-attribute 'region nil :background "#666")
+(setq column-number-mode t)
+(setq split-width-threshold 140)
 (setq font "Monaspace Neon-16")
 (if (eq system-type 'darwin)
 	(setq font "Monaco-18"))
 (set-face-attribute 'default nil :weight 'Regular :font (eval 'font))
 (global-visual-line-mode 't) ;; Nice for documents where 80char limit is useless
-(setq-default fill-column 80)
-(setq-default tab-width 4)
+
+(auto-fill-mode t)
 (column-number-mode 't)
 (tool-bar-mode -1)
-(menu-bar-mode t)
-(setq tool-bar-style 'image) ;; only useful when i actually have a tool bar
-;; (load-theme 'naysayer 't)	 
-;; (set-face-attribute 'region nil :background "#666")
-(setq column-number-mode t)
+(menu-bar-mode -1)
 (set-face-attribute 'font-lock-builtin-face nil :foreground "#DAB98F")
 (set-face-attribute 'font-lock-comment-face nil :foreground "gray50")
 (set-face-attribute 'font-lock-constant-face nil :foreground "olive drab")
@@ -31,75 +34,34 @@
 (set-foreground-color "burlywood3")
 (set-background-color "#161616")
 (set-cursor-color "#40FF40")
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "Gray15")
+(require 'ido)
+(ido-mode t)
 
 
-;; Compilation now inserts ansi escape codes
-(require 'ansi-color)
-(defun endless/colorize-compilation ()
-  "Colorize from `compilation-filter-start' to `point'."
-  (let ((inhibit-read-only t))
-    (ansi-color-apply-on-region
-     compilation-filter-start (point))))
-
-(add-hook 'compilation-filter-hook
-          #'endless/colorize-compilation)
+;; Customizations
+(defun load-todo () "Load my todo list"
+	   (interactive)
+	   (find-file todo-file))
 
 ;; Dired
 (setq dired-lising-switches "-aBhl --sort=time")
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
-;; Modes
-;; C code
-(setq-default c-basic-offset 4
-              tab-width 4
-              indent-tabs-mode t)
-(add-hook 'text-mode-hook (lambda ()
-							(auto-fill-mode )
-							(flyspell-mode )))
-
-(use-package ispc-mode
-  :ensure t)
-;; Text processing
-(add-hook 'text-mode-hook
-          (lambda ()
-            (define-key text-mode-map "\t" 'tab-to-tab-stop)
-			(define-key text-mode-map "\C-c\C-a" 'artist-mode)))
-
 ;; Spell checking
 (global-auto-revert-mode)
 (setq ispell-list-command "--list")
 (setq ispell-program-name "aspell")
-
-;; Asm
-(add-hook 'asm-mode-hook (lambda ()
-						   (setq electric-indent-mode nil)))
-;; Python
-(use-package elpy
-  :ensure t
-  :init (elpy-enable)
-  :bind ("C-c C-r f" . elpy-black-fix-code))
-
-(require 'ido)
-(ido-mode t)
 (eval-after-load "flyspell" '(progn
 							   (define-key flyspell-mouse-map (kbd "<C-down-mouse-1>") #'flyspell-correct-word)
 							   (define-key flyspell-mouse-map (kbd "<C-mouse-1>") 'undefined) ))
 
-(grep-apply-setting
- 'grep-find-command
- '("rg -n -H --no-heading -e ''" . 27))
 
-;; Code formating
-(use-package format-all
-  :ensure t)
-(add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
-(setq format-all-show-errors 'errors)
-(set-fill-column 81)
-(auto-fill-mode 't)
-
-(add-hook 'elpy-mode-hook (lambda ()
-                            (add-hook 'before-save-hook
-                                      'elpy-black-fix-code nil t)))
+;;;;;;Modes;;;;;;
+(load-file "~/.emacs.d/modes.el")
+(load-file "~/.emacs.d/code.el")
+;;;;;;;;;;;;;;;;;
 
 ;; Keys
 (use-package which-key
