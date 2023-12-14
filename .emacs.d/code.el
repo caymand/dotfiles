@@ -11,9 +11,7 @@
 (add-hook 'compilation-filter-hook
           #'endless/colorize-compilation)
 
-(grep-apply-setting
- 'grep-find-command
- '("rg -n -H --no-heading -e ''" . 27))
+(setq grep-find-command '("rg -n -H --no-heading -e ''" . 27))
 
 ;; Code formating
 (use-package format-all

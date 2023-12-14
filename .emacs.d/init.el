@@ -31,12 +31,16 @@
 (set-face-attribute 'font-lock-string-face nil :foreground "olive drab")
 (set-face-attribute 'font-lock-type-face nil :foreground "burlywood3")
 (set-face-attribute 'font-lock-variable-name-face nil :foreground "burlywood3")
+(global-font-lock-mode t)
 (set-foreground-color "burlywood3")
 (set-background-color "#161616")
 (set-cursor-color "#40FF40")
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "Gray15")
 (require 'ido)
+(setq ido-separator "\n")
+(setq ido-decorations
+	  '("{" "}" " | " " | ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 (ido-mode t)
 
 
