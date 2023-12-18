@@ -12,10 +12,7 @@
 ;; (set-face-attribute 'region nil :background "#666")
 (setq column-number-mode t)
 (setq split-width-threshold 140)
-(setq font "Monaspace Neon-16")
-(if (eq system-type 'darwin)
-	(setq font "Monaco-18"))
-(set-face-attribute 'default nil :weight 'Regular :font (eval 'font))
+(add-to-list 'default-frame-alist '(font . "Monaspace Neon-16"))
 (global-visual-line-mode 't) ;; Nice for documents where 80char limit is useless
 
 (auto-fill-mode t)
@@ -38,19 +35,22 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "Gray15")
 (require 'ido)
-(setq ido-separator "\n")
-(setq ido-decorations
-	  '("{" "}" " | " " | ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 (ido-mode t)
 
+(ido-everywhere t)
+(setq ido-decorations
+	  '("\n>> " "" "\n " " | ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 
 ;; Customizations
+(defun load-todo-dir () "Load directory of todo files"
+	   (interactive)
+	   (dired todo-dir))
 (defun load-todo () "Load my todo list"
 	   (interactive)
 	   (find-file todo-file))
 
 ;; Dired
-(setq dired-lising-switches "-aBhl --sort=time")
+(setq dired-lising-switches "-aBhlpF --sort=time")
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 ;; Spell checking
@@ -81,6 +81,7 @@ to the corresponding functions."
     (while keycommands
       (let ((key (car keycommands))
             (command (cadr keycommands)))
+		(print command)
         (push `(global-set-key (kbd ,key)
                                ,command)
               setkey-list))
@@ -92,7 +93,7 @@ to the corresponding functions."
  "\C-c b p" 'previous-buffer
  "\C-c b n" 'next-buffer
  "\C-c c c" 'compile
- "\C-c g" 'grep-find
+ "\C-c g g" 'grep-find
  "\C-c b b" 'beginning-of-buffer
  "\C-c b e" 'end-of-buffer
  )
