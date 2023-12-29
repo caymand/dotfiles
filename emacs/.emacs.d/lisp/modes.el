@@ -1,4 +1,4 @@
-(load "~/.emacs.d/lib.el") 
+(load-library "lib.el") 
 
 ;; LSP
 ;; I use eglot for LSP. This is a great article for how to setup the client:

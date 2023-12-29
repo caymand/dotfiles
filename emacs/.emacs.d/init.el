@@ -2,9 +2,8 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
-(add-to-list 'load-path "~/.emacs.d/lisp")
-(load-file "~/.emacs.d/lib.el")
-
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(load-library "lib.el")
 
 ;; Look and basic stuff
 (setq-default fill-column 80)
@@ -14,26 +13,12 @@
 (setq split-width-threshold 140)
 (add-to-list 'default-frame-alist '(font . "Monaspace Neon-16"))
 (global-visual-line-mode 't) ;; Nice for documents where 80char limit is useless
-
 (auto-fill-mode t)
 (column-number-mode 't)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(set-face-attribute 'font-lock-builtin-face nil :foreground "#DAB98F")
-(set-face-attribute 'font-lock-comment-face nil :foreground "gray50")
-(set-face-attribute 'font-lock-constant-face nil :foreground "olive drab")
-(set-face-attribute 'font-lock-doc-face nil :foreground "gray50")
-(set-face-attribute 'font-lock-function-name-face nil :foreground "burlywood3")
-(set-face-attribute 'font-lock-keyword-face nil :foreground "DarkGoldenrod3")
-(set-face-attribute 'font-lock-string-face nil :foreground "olive drab")
-(set-face-attribute 'font-lock-type-face nil :foreground "burlywood3")
-(set-face-attribute 'font-lock-variable-name-face nil :foreground "burlywood3")
-(global-font-lock-mode t)
-(set-foreground-color "burlywood3")
-(set-background-color "#161616")
-(set-cursor-color "#40FF40")
-(global-hl-line-mode 1)
-(set-face-background 'hl-line "Gray15")
+(add-hook 'server-after-make-frame-hook 'my-theme)
+
 (require 'ido)
 (ido-mode t)
 
@@ -63,31 +48,14 @@
 
 
 ;;;;;;Modes;;;;;;
-(load-file "~/.emacs.d/modes.el")
-(load-file "~/.emacs.d/code.el")
-;;;;;;;;;;;;;;;;;
-
-;; Keys
+;; Load some of my helper lisp files
+(load "modes.el")
+(load "code.el")
+;;;;;;keys;;;;;;;
 (use-package which-key
   :ensure t
   :config (which-key-setup-side-window-bottom))
 (which-key-mode)
-
-(defmacro global-set-keys (&rest keycommands)
-  "Register keys to commands.
-Analyze KEYCOMMANDS in pairs, and maps the corresponding keys
-to the corresponding functions."
-  (let ((setkey-list nil))
-    (while keycommands
-      (let ((key (car keycommands))
-            (command (cadr keycommands)))
-		(print command)
-        (push `(global-set-key (kbd ,key)
-                               ,command)
-              setkey-list))
-      (setq keycommands (cddr keycommands)))
-    (push 'progn setkey-list)
-    setkey-list))
 
 (global-set-keys
  "\C-c b p" 'previous-buffer
