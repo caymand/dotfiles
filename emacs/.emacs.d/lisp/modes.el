@@ -43,9 +43,16 @@
 (add-hook 'markdown-mode-hook 'markdown-hooks)
 
 ;; Python
-(defun run-test (start end)
+(defun get-python-function-name ()
+  "Get the name of the current Python function."
+  (interactive)
+  (save-excursion
+    (python-nav-beginning-of-defun)
+    (re-search-forward "def[[:space:]]+\\([a-zA-Z_][a-zA-Z0-9_]*\\)" nil t)
+    (match-string 1)))
+(defun run-test ()
   (interactive "r")
-  (let* ((test-name (buffer-substring-no-properties start end))
+  (let* ((test-name (get-python-function-name))
 		 (cmd (format "pytest %s -k %s" buffer-file-name test-name)))
 	(compile cmd)))
 (add-hook 'python-mode-hook
@@ -54,3 +61,11 @@
 			 "C-c g d" 'xref-find-definition
 			 "C-c c t" 'run-test)))
 ;; Alternatively we can add 'eglot-ensure to the python mode hook
+
+;; Swift
+(eval-after-load 'lsp-mode
+  (progn
+    (require 'lsp-sourcekit)
+    (setq lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp")))
+(add-hook 'swift-mode-hook (lambda () (lsp)))
+
