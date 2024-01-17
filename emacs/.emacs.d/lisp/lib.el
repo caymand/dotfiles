@@ -37,9 +37,11 @@ to the corresponding functions."
   (set-face-attribute 'font-lock-constant-face nil :foreground "olive drab")
   (set-face-attribute 'font-lock-doc-face nil :foreground "gray50")
   (set-face-attribute 'font-lock-function-name-face nil :foreground "burlywood3")
+  (set-face-attribute 'font-lock-function-call-face nil :foreground "peru")
   (set-face-attribute 'font-lock-keyword-face nil :foreground "DarkGoldenrod3")
   (set-face-attribute 'font-lock-string-face nil :foreground "olive drab")
-  (set-face-attribute 'font-lock-type-face nil :foreground "burlywood3")
+  ;; Be careful. Do you really want to have a color for this
+  (set-face-attribute 'font-lock-type-face nil :foreground "sienna")
   (set-face-attribute 'font-lock-variable-name-face nil :foreground "burlywood3")
   (global-font-lock-mode t)
   (set-foreground-color "burlywood3")

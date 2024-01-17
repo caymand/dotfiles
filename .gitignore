@@ -1,4 +1,8 @@
 **.DS_STORE
 dwm/*.o
 slstatus/*.p
+emacs/.emacs.d/elpa
+emacs/.emacs.d/ido*
+emacs/.emacs.d/eln*
+
 

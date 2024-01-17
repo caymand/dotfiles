@@ -18,6 +18,8 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (add-hook 'server-after-make-frame-hook 'my-theme)
+(when (daemonp)
+  (exec-path-from-shell-initialize))
 
 (require 'ido)
 (ido-mode t)
