@@ -37,8 +37,8 @@
 	   (find-file todo-file))
 
 ;; Dired
-(setq dired-lising-switches "-aBhlpF --sort=time")
-(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+;; (setq dired-lising-switches "-aBhlpF --sort=time")
+;; (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 ;; Spell checking
 (global-auto-revert-mode)
