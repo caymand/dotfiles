@@ -30,6 +30,11 @@ to the corresponding functions."
   (interactive "r") 
   (buffer-substring-no-properties start end))
 
+(defun load-init-file ()
+  (interactive)
+  (find-file-other-window user-init-file))
+
+
 ;; Visual
 (defun my-theme () 
   (set-face-attribute 'font-lock-builtin-face nil :foreground "#DAB98F")
@@ -37,7 +42,7 @@ to the corresponding functions."
   (set-face-attribute 'font-lock-constant-face nil :foreground "olive drab")
   (set-face-attribute 'font-lock-doc-face nil :foreground "gray50")
   (set-face-attribute 'font-lock-function-name-face nil :foreground "burlywood3")
-  (set-face-attribute 'font-lock-function-call-face nil :foreground "peru")
+  ;;(set-face-attribute 'font-lock-function-call-face nil :foreground "peru")
   (set-face-attribute 'font-lock-keyword-face nil :foreground "DarkGoldenrod3")
   (set-face-attribute 'font-lock-string-face nil :foreground "olive drab")
   ;; Be careful. Do you really want to have a color for this

@@ -30,4 +30,4 @@ if [ $(uname) = Darwin ]; then
 fi
 export SHELL=/usr/local/bin/bash
 
-eval $(thefuck --alias)
+# eval $(thefuck --alias)

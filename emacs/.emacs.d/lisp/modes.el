@@ -12,9 +12,19 @@
               indent-tabs-mode t)
 ;; Text
 (add-hook 'text-mode-hook (lambda ()
-							(auto-fill-mode )
-							(flyspell-mode )
+							(auto-fill-mode)
+							(flyspell-mode)
 							(define-key text-mode-map "\C-c\C-a" 'artist-mode)))
+;; Tex	
+(use-package tex
+  :ensure auctex
+  :init
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (add-hook 'TeX-mode-hook (lambda ()
+							 (auto-fill-mode -1))))
+
 ;; ISPC
 (use-package ispc-mode
   :ensure t)
