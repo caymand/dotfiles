@@ -15,6 +15,9 @@
 							(auto-fill-mode)
 							(flyspell-mode)
 							(define-key text-mode-map "\C-c\C-a" 'artist-mode)))
+
+;; Todo
+
 ;; Tex	
 (use-package tex
   :ensure auctex
@@ -35,8 +38,8 @@
 
 ;; Futhark
 (add-hook 'futhark-mode-hook (lambda ()
-							  (flycheck-mode)
-							  (eglot-ensure)))
+							   (flycheck-mode)
+							   (eglot-ensure)))
 ;; Ocaml
 
 ;; Markdown
@@ -67,8 +70,7 @@
 	(compile cmd)))
 (add-hook 'python-mode-hook
 		  (lambda ()
-			(create-local-keys
-			 "C-c g d" 'xref-find-definition
+			(create-local-keys			 
 			 "C-c c t" 'run-test)))
 ;; Alternatively we can add 'eglot-ensure to the python mode hook
 

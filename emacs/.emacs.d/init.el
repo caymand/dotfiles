@@ -9,6 +9,7 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load-library "lib.el")
 
+
 ;; Look and basic stuff
 (setq-default fill-column 80)
 (setq-default tab-width 4)
@@ -71,6 +72,8 @@
  "\C-c g g" 'grep-find
  "\C-c b b" 'beginning-of-buffer
  "\C-c b e" 'end-of-buffer
+ "\C-c t s" 'todo-show
+ "\C-c t j" 'todo-jump-to-category
  )
 
 ;; Variables

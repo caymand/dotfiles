@@ -20,9 +20,11 @@ to the corresponding functions."
 
 
 (defun create-local-keys (&rest key-cmds)
+  "Bind keys to commands. Use for modes."
   (when key-cmds
 	(let ((key (car key-cmds))			
 		  (cmd (cadr key-cmds)))
+	  (local-set-key (kbd key) cmd)
 	  (apply 'create-local-keys (cddr key-cmds)))))
   
 (defun selected-text (start end)
