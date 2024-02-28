@@ -74,6 +74,7 @@
  "\C-c b e" 'end-of-buffer
  "\C-c t s" 'todo-show
  "\C-c t j" 'todo-jump-to-category
+ "\C-c t i" 'todo-insert-item
  )
 
 ;; Variables

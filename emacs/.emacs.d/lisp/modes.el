@@ -17,6 +17,7 @@
 							(define-key text-mode-map "\C-c\C-a" 'artist-mode)))
 
 ;; Todo
+(setq todo-show-with-done t)
 
 ;; Tex	
 (use-package tex
