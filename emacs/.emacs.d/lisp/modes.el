@@ -6,10 +6,22 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs '(Python . "pyright")))
 
-;; C 
-(setq-default c-basic-offset 4
+;; Elisp
+(mapc (lambda (mode)
+		(font-lock-add-keywords mode
+								'(("\\<\\(TODO\\)" 1 'font-lock-warning-face t))))
+	  '(python-mode emacs-lisp-mode cc-mode))
+
+;; C/C++
+(defun c-mode-indentation ()
+  (setq-default c-basic-offset 4
               tab-width 4
               indent-tabs-mode t)
+  (c-set-offset 'substatement-open '0))
+
+(add-hook 'c-mode-common-hook (lambda ()
+								(c-mode-indentation)))
+
 ;; Text
 (add-hook 'text-mode-hook (lambda ()
 							(auto-fill-mode)
@@ -19,15 +31,29 @@
 ;; Todo
 (setq todo-show-with-done t)
 
-;; Tex	
+
+;; Tex
 (use-package tex
   :ensure auctex
   :init
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
+  (setq TeX-install-font-lock 'tex-font-setup)
+  (setq TeX-newline-function #'newline-and-indent)
+  ;; (setq TeX-indent-open-delimiters "{")
+  ;; (setq TeX-indent-close-delimiters "}")
+  ;; (setq TeX-install-font-lock 'font-latex-setup)
+  (when (eq system-type 'darwin)
+	(setq TeX-view-program-selection '((output-pdf "skim")))
+	(setq TeX-view-program-list '(("skim" "open -a skim "))))
   (add-hook 'TeX-mode-hook (lambda ()
 							 (auto-fill-mode -1))))
+; This handy little things makes the docview buffer revert 
+;; (add-hook
+;;  'TeX-after-compilation-finished-functions
+;;  #'TeX-revert-document-buffer)
+
 
 ;; ISPC
 (use-package ispc-mode
