@@ -1,5 +1,21 @@
 (load-library "lib.el")
 
+;; Use treesitter
+(require 'treesit)
+;; Now use treesitter major mode for these modes
+(push '(python-mode . python-ts-mode) major-mode-remap-alist)
+(push '(c-mode . c-ts-mode) major-mode-remap-alist)
+(push '(c++-mode . c++-ts-mode) major-mode-remap-alist)
+;; Load the language objects from here
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+	 (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "master" "src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
+(setq treesit-font-lock-level 4)
+
 
 ;; LSP
 ;; I use eglot for LSP. This is a great article for how to setup the client:
@@ -8,7 +24,7 @@
   (add-to-list 'eglot-server-programs '(Python . "pyright")))
 
 ;; Elisp
-;; TODO: add this to lib.
+;; Setup TODO and NOTE highlight for some modes
 (mapc (lambda (mode)
 		(font-lock-add-keywords mode
 								'(("\\<\\(TODO\\)" 1 'font-lock-warning-face t)
