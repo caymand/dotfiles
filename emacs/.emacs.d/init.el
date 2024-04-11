@@ -3,14 +3,18 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (setq package-install-upgrade-built-in t)
-(when (memq window-system '(mac ns x))
+(when (or (daemonp) (memq window-system '(mac ns x)))
   (exec-path-from-shell-initialize))
-(when (daemonp)
-  (exec-path-from-shell-initialize))
+(defun set-cmd-option ()
+  (when (eq system-type 'darwin)
+	(setq mac-command-modifier 'meta)
+	(setq mac-option-modifier 'nil)))
+  
+;(add-hook 'after-make-frame-functions 'set-cmd-option)
+;(set-cmd-option)
+
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load-library "lib.el")
-
-
 ;; Look and basic stuff
 (setq-default fill-column 80)
 (setq-default tab-width 4)
@@ -28,7 +32,6 @@
 (require 'ido)
 (ido-mode t)
 (setq doc-view-mupdf-use-svg (image-type-available-p 'svg))
-
 (ido-everywhere t)
 (setq ido-decorations
 	  '("\n>> " "" "\n " " | ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
@@ -42,8 +45,7 @@
 	   (find-file todo-file))
 
 ;; Dired
-;; (setq dired-lising-switches "-aBhlpF --sort=time")
-;; (add-hook 'dired-mode-hook #'dired-hide-details-mode)
+(setq dired-listing-switches "-alF")
 
 ;; Spell checking
 (global-auto-revert-mode)
@@ -166,6 +168,8 @@
 	 ("_Ledger" ledger-mode)
 	 ("_Nginx" nginxfmt)
 	 ("_Snakemake" snakefmt)))
+ '(ns-alternate-modifier 'none)
+ '(ns-command-modifier 'meta)
  '(package-selected-packages
    '(seq haskell-mode hasklig-mode magit yasnippet eglot adoc-mode futhark-mode markdown-mode vagrant-tramp vagrant acme-theme swift-mode elpy naysayer-theme tao-theme afternoon-theme monokai-theme nimbus-theme github-theme erlang ein vterm persp-mode flycheck which-key use-package format-all)))
 (custom-set-faces

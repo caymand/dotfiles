@@ -1,4 +1,5 @@
-(load-library "lib.el") 
+(load-library "lib.el")
+
 
 ;; LSP
 ;; I use eglot for LSP. This is a great article for how to setup the client:
@@ -7,20 +8,36 @@
   (add-to-list 'eglot-server-programs '(Python . "pyright")))
 
 ;; Elisp
+;; TODO: add this to lib.
 (mapc (lambda (mode)
 		(font-lock-add-keywords mode
-								'(("\\<\\(TODO\\)" 1 'font-lock-warning-face t))))
-	  '(python-mode emacs-lisp-mode cc-mode))
+								'(("\\<\\(TODO\\)" 1 'font-lock-warning-face t)
+								  ("\\<\\(NOTE\\)" 1 'font-lock-doc-markup-face t))))
+	  '(python-mode
+		emacs-lisp-mode
+		c++-mode
+	    LaTeX-mode))
 
 ;; C/C++
-(defun c-mode-indentation ()
-  (setq-default c-basic-offset 4
-              tab-width 4
-              indent-tabs-mode t)
-  (c-set-offset 'substatement-open '0))
+(defun no-newline-semicolon()
+  (save-excursion
+	'stop))
 
+(c-add-style "my-cpp-style"
+			 '("bsd"
+			   (c-basic-offset . 4)
+			   (c-offsets-alist
+				(substatement-open . 0)
+				(inline-open . 0)
+				(block-open . 0)
+				(defun-open . 0)
+				(brace-list-open . 0))
+			   (c-hanging-semi&comma-criteria no-newline-semicolon)))
 (add-hook 'c-mode-common-hook (lambda ()
-								(c-mode-indentation)))
+								(c-toggle-auto-newline 1)
+								(c-set-style "my-cpp-style")))
+	;; (c-toggle-auto-newline 1)
+								;; (c-toggle-syntactic-indentation 1))
 
 ;; Text
 (add-hook 'text-mode-hook (lambda ()
@@ -39,14 +56,14 @@
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
-  (setq TeX-install-font-lock 'tex-font-setup)
-  (setq TeX-newline-function #'newline-and-indent)
-  ;; (setq TeX-indent-open-delimiters "{")
-  ;; (setq TeX-indent-close-delimiters "}")
-  ;; (setq TeX-install-font-lock 'font-latex-setup)
+  ;; (setq TeX-install-font-lock 'tex-font-setup)
+  (setq TeX-install-font-lock 'font-latex-setup)
+  ;; (setq TeX-newline-function #'newline-and-indent)
   (when (eq system-type 'darwin)
 	(setq TeX-view-program-selection '((output-pdf "skim")))
-	(setq TeX-view-program-list '(("skim" "open -a skim "))))
+	(setq TeX-view-program-list '(("skim" "/Applications/Skim.app/Contents/SharedSupport/displayline %n %o %b"))))
+
+
   (add-hook 'TeX-mode-hook (lambda ()
 							 (auto-fill-mode -1))))
 ; This handy little things makes the docview buffer revert 
