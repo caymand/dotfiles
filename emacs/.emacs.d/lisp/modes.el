@@ -15,8 +15,7 @@
 	 (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "master" "src")
      (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
 (setq treesit-font-lock-level 4)
-
-
+(treesit-major-mode-setup)
 ;; LSP
 ;; I use eglot for LSP. This is a great article for how to setup the client:
 ;; https://joaotavora.github.io/eglot/
@@ -32,6 +31,7 @@
 	  '(python-mode
 		emacs-lisp-mode
 		c++-mode
+		c++-ts-mode
 	    LaTeX-mode))
 
 ;; C/C++
@@ -49,9 +49,15 @@
 				(defun-open . 0)
 				(brace-list-open . 0))
 			   (c-hanging-semi&comma-criteria no-newline-semicolon)))
+
+(setq c-ts-mode-indent-offset 4)
+(add-hook 'c-ts-mode-hook (lambda ()
+							(electric-pair-mode)))
+;; Not used any more. I use treesit
 (add-hook 'c-mode-common-hook (lambda ()
 								(c-toggle-auto-newline 1)
 								(c-set-style "my-cpp-style")))
+
 	;; (c-toggle-auto-newline 1)
 								;; (c-toggle-syntactic-indentation 1))
 
