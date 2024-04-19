@@ -4,5 +4,6 @@ slstatus/*.p
 emacs/.emacs.d/elpa
 emacs/.emacs.d/ido*
 emacs/.emacs.d/eln*
+emacs/.emacs.d/projects
 
 

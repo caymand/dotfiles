@@ -1,6 +1,6 @@
 ;;; -*- lisp-data -*-
-(("~/src/dotfiles/")
- ("~/Datalogi/Datalogi/")
+(("~/Datalogi/Datalogi/")
+ ("~/src/dotfiles/")
  ("~/src/graphics/")
  ("~/src/graphics-unix/")
  ("~/src/website/"))
