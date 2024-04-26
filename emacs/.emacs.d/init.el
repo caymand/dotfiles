@@ -18,7 +18,6 @@
 ;; Look and basic stuff
 (setq-default fill-column 80)
 (setq-default tab-width 4)
-;; (set-face-attribute 'region nil :background "#666")
 (setq column-number-mode t)
 (setq split-width-threshold 140)
 (add-to-list 'default-frame-alist '(font . "Monaspace Neon-20"))
@@ -171,7 +170,7 @@
  '(ns-alternate-modifier 'none)
  '(ns-command-modifier 'meta)
  '(package-selected-packages
-   '(seq haskell-mode hasklig-mode magit yasnippet eglot adoc-mode futhark-mode markdown-mode vagrant-tramp vagrant acme-theme swift-mode elpy naysayer-theme tao-theme afternoon-theme monokai-theme nimbus-theme github-theme erlang ein vterm persp-mode flycheck which-key use-package format-all)))
+   '(multiple-cursors seq haskell-mode hasklig-mode magit yasnippet eglot adoc-mode futhark-mode markdown-mode vagrant-tramp vagrant acme-theme swift-mode elpy naysayer-theme tao-theme afternoon-theme monokai-theme nimbus-theme github-theme erlang ein vterm persp-mode flycheck which-key use-package format-all)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

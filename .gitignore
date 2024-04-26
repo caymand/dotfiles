@@ -4,5 +4,11 @@ slstatus/*.p
 emacs/.emacs.d/elpa
 emacs/.emacs.d/ido*
 emacs/.emacs.d/eln*
+emacs/.emacs.d/todo
+emacs/.emacs.d/transient
+emacs/.emacs.d/tutorial
+emacs/.emacs.d/tree-sitter/
+emacs/.emacs.d/.mc-lists.el
+
 
 
