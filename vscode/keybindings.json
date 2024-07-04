@@ -4,5 +4,15 @@
         "key": "ctrl+alt+i",
         "command": "editor.action.triggerSuggest",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+o",
+        "command": "workbench.action.focusNextGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+3",
+        "command": "workbench.action.splitEditor",
+        "when": "editorTextFocus"
     }
 ]

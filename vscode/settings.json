@@ -2,12 +2,14 @@
     "git.openRepositoryInParentFolders": "never",
     "workbench.colorTheme": "Visual Studio Dark",
     "editor.fontSize": 16,
-    "editor.fontFamily": "Monaspace Neon",
     "editor.quickSuggestions": {
     "other": false,
     "comments": false,
     "strings": false
     },
-    "editor.suggestOnTriggerCharacters": false
-
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.fontFamily": "Monaspace Neon",
+    "editor.minimap.enabled": false,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.defaultLocation": "editor"
 }
