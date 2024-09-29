@@ -1,14 +1,15 @@
 **.DS_STORE
 dwm/*.o
 slstatus/*.p
-emacs/.emacs.d/elpa
-emacs/.emacs.d/ido*
-emacs/.emacs.d/eln*
-emacs/.emacs.d/todo
-emacs/.emacs.d/transient
-emacs/.emacs.d/tutorial
-emacs/.emacs.d/tree-sitter/
-emacs/.emacs.d/.mc-lists.el
-emacs/.emacs.d/projects
+**/.emacs.d/auto-save-list
+**/.emacs.d/elpa
+**/.emacs.d/ido*
+**/.emacs.d/eln*
+**/.emacs.d/todo
+**/.emacs.d/transient
+**/.emacs.d/tutorial
+**/.emacs.d/tree-sitter/
+**/.emacs.d/.mc-lists.el
+**/.emacs.d/projects
 
 
