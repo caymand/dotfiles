@@ -1,23 +1,6 @@
 (provide 'modes)
 ;; Haskell
-(require 'haskell-interactive-mode)
-(require 'haskell-process)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-(eval-after-load "haskell-mode"
-  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
-(setq haskell-process-type 'cabal-repl)
-
-(eval-after-load 'haskell-mode
-  '(progn
-     (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)))
-
-(custom-set-variables
-   '(haskell-process-suggest-remove-import-lines t)
-   '(haskell-process-auto-import-loaded-modules t)
-   '(haskell-process-log t))
-; TODO: Format on save
-
-
+;; TBD
 ;; C/C++/CUDA
 
 (c-add-style "my-cpp-style"
