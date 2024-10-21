@@ -14,6 +14,8 @@
 ;; Visual
 (my-theme)
 (setq-default indent-tabs-mode nil)
+(setq grep-command "rg --no-heading -nH ")
+(setq grep-find-command "rg --no-heading --hidden ")
 
 ;; KEYS
 (keymap-global-set "C-c c c" 'compile)
