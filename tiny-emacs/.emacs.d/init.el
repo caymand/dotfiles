@@ -24,6 +24,10 @@
 (which-key-mode)
 (global-auto-revert-mode)
 
+;; Environment 
+(when (eq system-type 'windows-nt)
+  (setenv "PATH" (concat "C:/Program Files/Git/usr/bin;" (getenv "PATH"))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
