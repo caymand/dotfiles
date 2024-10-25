@@ -16,6 +16,8 @@
 (setq-default indent-tabs-mode nil)
 (setq grep-command "rg --no-heading -nH ")
 (setq grep-find-command "rg --no-heading --hidden ")
+(when (eq system-type 'gnu/linux)
+  (set-face-attribute 'default nil :font "Monaspace Neon" :height 140))
 
 ;; KEYS
 (keymap-global-set "C-c c c" 'compile)
