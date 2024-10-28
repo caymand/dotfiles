@@ -11,5 +11,6 @@ slstatus/*.p
 **/.emacs.d/tree-sitter/
 **/.emacs.d/.mc-lists.el
 **/.emacs.d/projects
+**/.emacs.d/*session*
 
 

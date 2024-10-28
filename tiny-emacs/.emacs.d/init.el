@@ -16,8 +16,11 @@
 (setq-default indent-tabs-mode nil)
 (setq grep-command "rg --no-heading -nH ")
 (setq grep-find-command "rg --no-heading --hidden ")
+(setq column-number-mode t)
 (when (eq system-type 'gnu/linux)
-  (set-face-attribute 'default nil :font "Monaspace Neon" :height 140))
+  (set-face-attribute 'default nil :font "Iosevka" :height 160))
+(vertico-mode)
+(setq split-width-threshold 160)
 
 ;; KEYS
 (keymap-global-set "C-c c c" 'compile)
@@ -40,11 +43,11 @@
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
  '(package-selected-packages
-   '(which-key markdown-mode haskell-mode futhark-mode company))
+   '(magit dumb-jump ormolu vertico which-key markdown-mode haskell-mode futhark-mode company))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight regular :height 120 :width normal)))))
+ )
