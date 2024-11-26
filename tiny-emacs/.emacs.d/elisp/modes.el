@@ -2,6 +2,9 @@
 ;; Haskell
 ;; TBD
 
+;; XREF
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+
 ;; C/C++/CUDA
 
 (if (eq system-type 'windows-nt)
