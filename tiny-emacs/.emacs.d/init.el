@@ -13,7 +13,7 @@
 
 ;; Visual
 ;; (my-theme)
-(add-hook 'after-init-hook (lambda () (load-theme 'my-go-theme t)))
+(add-hook 'after-init-hook (lambda () (load-theme 'my-theme t)))
 (setq-default indent-tabs-mode nil)
 (setq grep-command "rg --no-heading -nH ")
 (setq grep-find-command "rg --no-heading --hidden ")
@@ -36,6 +36,9 @@
 ;; KEYS
 (keymap-global-set "C-c c c" 'compile)
 
+;; Dired
+(setq dired-dwim-target t)
+
 ; Modes
 (which-key-mode)
 (global-auto-revert-mode)
@@ -56,7 +59,7 @@
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
  '(package-selected-packages
-   '(cuda-mode acme-theme go-mode orderless magit dumb-jump ormolu vertico which-key markdown-mode haskell-mode futhark-mode company))
+   '(gnuplot cuda-mode acme-theme go-mode orderless magit dumb-jump ormolu vertico which-key markdown-mode haskell-mode futhark-mode company))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
