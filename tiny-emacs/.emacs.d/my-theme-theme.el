@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'my-theme
- '(default ((t (:family "Iosevka" :foundry "UKWN" :width normal :height 158 :weight regular :slant normal :underline nil :overline nil :extend nil :strike-through nil :box nil :inverse-video nil :foreground "burlywood3" :background "#161616" :stipple nil :inherit nil))))
+ '(default ((t (:family "Iosevka" :foundry "UKWN" :width normal :height 140 :weight regular :slant normal :underline nil :overline nil :extend nil :strike-through nil :box nil :inverse-video nil :foreground "burlywood3" :background "#161616" :stipple nil :inherit nil))))
  '(cursor ((t (:background "#40FF40"))))
  '(fixed-pitch ((t (:family "Monospace"))))
  '(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
